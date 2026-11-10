@@ -1,0 +1,153 @@
+{
+  "algorithm": "scikit-learn RandomForestClassifier",
+  "scikit_learn_version": "1.0.2",
+  "training_data_source": "Open-Meteo Historical Weather API; ERA5 reanalysis; CC BY 4.0 attribution required",
+  "training_data_url": "https://archive-api.open-meteo.com/v1/archive",
+  "coordinate_source": "OpenStreetMap city locations, linked in training locations",
+  "training_period": {
+    "start": "2015-01-01",
+    "end": "2024-12-31",
+    "test_starts": "2023-01-01"
+  },
+  "split_method": "Chronological holdout: earlier dates for training, final two calendar years for testing",
+  "minimum_positive_holdout_samples_for_numeric_score": 10,
+  "data_rows": 21918,
+  "training_rows": 17532,
+  "test_rows": 4386,
+  "data_status": "cached",
+  "feature_columns": [
+    "temperature_2m_max_c",
+    "relative_humidity_2m_mean_pct",
+    "precipitation_sum_mm",
+    "wind_speed_10m_max_kmh",
+    "elevation_m"
+  ],
+  "feature_units": {
+    "temperature_2m_max_c": "°C",
+    "relative_humidity_2m_mean_pct": "%",
+    "precipitation_sum_mm": "mm",
+    "wind_speed_10m_max_kmh": "km/h",
+    "elevation_m": "m"
+  },
+  "preprocessing": "None; raw numeric feature vectors are passed to each RandomForestClassifier in feature_columns order.",
+  "training_feature_ranges": {
+    "temperature_2m_max_c": {
+      "min": -11.6,
+      "max": 44.4,
+      "unit": "°C"
+    },
+    "relative_humidity_2m_mean_pct": {
+      "min": 14.0,
+      "max": 100.0,
+      "unit": "%"
+    },
+    "precipitation_sum_mm": {
+      "min": 0.0,
+      "max": 326.0,
+      "unit": "mm"
+    },
+    "wind_speed_10m_max_kmh": {
+      "min": 3.7,
+      "max": 68.9,
+      "unit": "km/h"
+    },
+    "elevation_m": {
+      "min": 12.0,
+      "max": 1588.0,
+      "unit": "m"
+    }
+  },
+  "training_locations": [
+    {
+      "name": "Samastipur",
+      "district": "Samastipur",
+      "state": "Bihar",
+      "latitude": 25.8596845,
+      "longitude": 85.7839038,
+      "osm": "https://www.openstreetmap.org/node/245739285"
+    },
+    {
+      "name": "Pudukkottai",
+      "district": "Pudukkottai",
+      "state": "Tamil Nadu",
+      "latitude": 10.3826515,
+      "longitude": 78.8191259,
+      "osm": "https://www.openstreetmap.org/way/84749701"
+    },
+    {
+      "name": "Srinagar",
+      "district": "Srinagar",
+      "state": "Jammu and Kashmir",
+      "latitude": 34.0747444,
+      "longitude": 74.8204443,
+      "osm": "https://www.openstreetmap.org/node/273658993"
+    },
+    {
+      "name": "Surat",
+      "district": "Surat",
+      "state": "Gujarat",
+      "latitude": 21.2094892,
+      "longitude": 72.8317058,
+      "osm": "https://www.openstreetmap.org/node/10029899747"
+    },
+    {
+      "name": "Kolkata",
+      "district": "Kolkata",
+      "state": "West Bengal",
+      "latitude": 22.5726459,
+      "longitude": 88.3638953,
+      "osm": "https://www.openstreetmap.org/relation/9381363"
+    },
+    {
+      "name": "Guwahati",
+      "district": "Kamrup Metropolitan",
+      "state": "Assam",
+      "latitude": 26.1805978,
+      "longitude": 91.753943,
+      "osm": "https://www.openstreetmap.org/node/566672802"
+    }
+  ],
+  "targets": {
+    "flood": "Daily precipitation >=64.5 mm (heavy-rainfall trigger proxy; not observed flooding).",
+    "heatwave": "Daily maximum temperature >=40 C below 1000 m or >=30 C at/above 1000 m (heat trigger proxy; not official IMD heatwave declaration).",
+    "cyclone": "Daily maximum 10 m wind >=63 km/h (wind trigger proxy; not cyclone detection or landfall probability)."
+  },
+  "excluded_features": {
+    "population_density": "Not present in the existing local-body dataset or the selected weather endpoint; not imputed or fabricated.",
+    "flood_extent_and_cyclone_tracks": "No verified event/impact labels were available in the project; the output is an explicitly labeled weather-trigger proxy."
+  },
+  "risk_score_interpretation": "Uncalibrated Random Forest class score (0-100) for reproducing a feature-derived daily weather-trigger proxy on the highest-scoring day in the next 7-day forecast. It is not a calibrated disaster probability, official warning, or independently validated event forecast. Evaluation measures reproduction of the stated feature-derived trigger labels.",
+  "evaluation": {
+    "flood": {
+      "accuracy": 0.9997720018239854,
+      "precision": 1.0,
+      "recall": 0.95,
+      "f1": 0.9743589743589743,
+      "positive_test_samples": 20,
+      "positive_train_samples": 76,
+      "test_samples": 4386,
+      "validated": true
+    },
+    "heatwave": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "positive_test_samples": 243,
+      "positive_train_samples": 364,
+      "test_samples": 4386,
+      "validated": true
+    },
+    "cyclone": {
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "positive_test_samples": 0,
+      "positive_train_samples": 1,
+      "test_samples": 4386,
+      "validated": false
+    }
+  },
+  "model_file": "climate_risk_models.joblib"
+}

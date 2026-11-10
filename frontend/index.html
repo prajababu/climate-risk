@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateRisk AI | Climate Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🌍</div>
+            <div>
+                <h2>ClimateRisk <span>AI</span></h2>
+                <small>CLIMATE INTELLIGENCE</small>
+            </div>
+        </div>
+
+        <div class="menu-label">MAIN MENU</div>
+
+        <nav class="navigation">
+            <a href="#" class="nav-link active" data-page="dashboard">▦ Dashboard</a>
+            <a href="#" class="nav-link" data-page="prediction">◈ AI Risk Prediction</a>
+            <a href="#" class="nav-link" data-page="map">⌖ Climate Risk Map</a>
+            <a href="#" class="nav-link" data-page="digital-twin">◇ Digital Twin</a>
+            <a href="#" class="nav-link" data-page="vulnerability">♧ Vulnerability Analysis</a>
+            <a href="#" class="nav-link" data-page="alerts">♢ Alerts & Warnings</a>
+            <a href="#" class="nav-link" data-page="preparedness">✓ Preparedness</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="system-status">
+                <span class="status-dot"></span>
+                System Online
+            </div>
+            <p>ClimateRisk AI v1.0</p>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h2 id="page-title">Climate Dashboard</h2>
+                <p>Community Climate Risk & Resilience Platform</p>
+            </div>
+
+            <div class="top-actions">
+                <button class="icon-button" aria-label="Notifications">♧</button>
+                <div class="profile">
+                    <div class="avatar">P</div>
+                    <div>
+                        <strong>Administrator</strong>
+                        <small>Project Admin</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- DASHBOARD PAGE -->
+        <section class="page active" id="dashboard">
+
+            <div class="welcome-section">
+                <div>
+                    <h1>Climate Intelligence Overview</h1>
+                    <p>Monitor, predict and understand climate risks.</p>
+                </div>
+                <div class="live-badge">
+                    <span class="status-dot"></span>
+                    Monitoring Dashboard
+                </div>
+            </div>
+
+
+            <!-- STAT CARDS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Monitored Locations</span>
+                        <span class="stat-icon">⌖</span>
+                    </div>
+                    <h2>—</h2>
+                    <small>No live monitoring-count API connected</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Flood Risk</span>
+                        <span class="stat-icon">🌊</span>
+                    </div>
+                    <h2 id="dashboardFloodRiskScore">—</h2>
+                    <small id="dashboardFloodRiskContext">Select a city for a live forecast</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Heatwave Risk</span>
+                        <span class="stat-icon">☀</span>
+                    </div>
+                    <h2 id="dashboardHeatRiskScore">—</h2>
+                    <small id="dashboardHeatRiskContext">Select a city for a live forecast</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Active Alerts</span>
+                        <span class="stat-icon">♧</span>
+                    </div>
+                    <h2>—</h2>
+                    <small>No live alert-count API connected</small>
+                </div>
+
+            </div>
+
+            <section class="panel climate-risk-analysis" id="dashboardRiskPanel">
+                <h3>Selected Location Climate Risk</h3>
+                <p class="risk-empty-state">
+                    Choose a city or town on the climate map to request a seven-day analysis.
+                </p>
+            </section>
+
+
+            <!-- ANALYTICS -->
+            <div class="content-grid">
+
+                <div class="panel chart-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Climate Analytics</h3>
+                            <p>Illustrative monthly rainfall data</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="rainfallChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="panel risk-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Risk Distribution</h3>
+                            <p>Sample location categories</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- ALERTS -->
+            <div class="panel alerts-panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>Recent Climate Alerts</h3>
+                        <p>Sample notifications for dashboard preview</p>
+                    </div>
+                    <button class="view-button" data-page="alerts">View All →</button>
+                </div>
+
+                <div class="alert-item">
+                    <span class="alert-symbol flood">🌊</span>
+                    <div class="alert-details">
+                        <strong>Flood Risk Warning</strong>
+                        <small>High rainfall risk detected in monitored area</small>
+                    </div>
+                    <span class="risk-label high">HIGH</span>
+                </div>
+
+                <div class="alert-item">
+                    <span class="alert-symbol heat">☀</span>
+                    <div class="alert-details">
+                        <strong>Heatwave Advisory</strong>
+                        <small>Elevated temperature risk in monitored area</small>
+                    </div>
+                    <span class="risk-label moderate">MODERATE</span>
+                </div>
+
+                <div class="alert-item">
+                    <span class="alert-symbol wind">🌪</span>
+                    <div class="alert-details">
+                        <strong>Cyclone Monitoring</strong>
+                        <small>Weather monitoring status: sample data</small>
+                    </div>
+                    <span class="risk-label low">LOW</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- OTHER MODULE PAGES -->
+        <section class="page module-page" id="prediction">
+            <h1>AI Risk Prediction</h1>
+            <p>Seven-day weather-trigger estimates from historical climate training and forecast data.</p>
+            <section class="panel climate-risk-analysis" id="predictionRiskPanel">
+                <h3>Selected Location Climate Risk</h3>
+                <p class="risk-empty-state">
+                    Choose a city or town on the climate map to run the trained model.
+                </p>
+            </section>
+        </section>
+
+<section class="page module-page" id="map">
+
+    <div class="map-heading">
+        <div>
+            <h1>India Climate Risk Map</h1>
+            <p>Explore climate risks across Indian States, Districts and Cities.</p>
+        </div>
+        <span class="live-badge">● GIS MONITORING</span>
+    </div>
+
+    <!-- LOCATION FILTERS -->
+    <div class="panel location-panel">
+
+        <h3>Select Your Location</h3>
+
+        <div class="location-filters">
+
+            <div class="filter-group">
+                <label>Country</label>
+                <select id="countrySelect">
+                    <option value="India">India</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>State / Union Territory</label>
+                <select id="stateSelect">
+                    <option value="">Select State / UT</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>District</label>
+                <select id="districtSelect" disabled>
+                    <option value="">Select District</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>City</label>
+                <select id="citySelect" disabled>
+                    <option value="">Select City</option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MAP AND LAYERS -->
+    <div class="map-layout">
+
+        <div class="panel map-panel">
+
+            <div class="panel-header">
+                <div>
+                    <h3>Interactive India Map</h3>
+                    <p>Geographical climate risk visualization</p>
+                </div>
+            </div>
+
+            <div id="climateMap"></div>
+            <p class="map-data-attribution">
+                City coordinates are looked up on demand using
+                <a href="https://nominatim.openstreetmap.org/" target="_blank" rel="noopener noreferrer">OpenStreetMap Nominatim</a>
+                through the local backend. Only exact verified matches are used;
+                results and verified coordinates are cached. Map data ©
+                <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>.
+            </p>
+            <details class="map-geocoding-settings">
+                <summary>Geocoding service settings</summary>
+                <label for="geocodingEndpoint">Nominatim-compatible search endpoint</label>
+                <div class="geocoding-endpoint-control">
+                    <input
+                        id="geocodingEndpoint"
+                        type="url"
+                        value="https://nominatim.openstreetmap.org/search"
+                        autocomplete="url"
+                    >
+                    <button id="saveGeocodingEndpoint" type="button">Save</button>
+                </div>
+                <small>
+                    Default lookups are user-triggered and rate-limited by the backend.
+                    Custom endpoints are called from this browser and must support CORS.
+                    Keep total site traffic within your provider's policy.
+                </small>
+            </details>
+
+        </div>
+
+        <div class="panel map-controls">
+
+            <h3>Climate Risk Layers</h3>
+
+            <label class="layer-option">
+                <input type="checkbox" id="floodLayer" checked>
+                🌊 Flood Risk
+            </label>
+
+            <label class="layer-option">
+                <input type="checkbox" id="heatLayer">
+                ☀ Heatwave Risk
+            </label>
+
+            <label class="layer-option">
+                <input type="checkbox" id="cycloneLayer">
+                🌪 Cyclone Risk
+            </label>
+
+            <label class="layer-option">
+                <input type="checkbox" id="rainLayer">
+                🌧 Rainfall Analysis
+            </label>
+
+            <div class="map-location-info">
+                <h3>Selected Location</h3>
+                <p id="selectedLocation">India</p>
+                <div class="location-risk">
+                    <span>Risk Level</span>
+                    <strong id="mapRiskLevel">Awaiting data</strong>
+                </div>
+                <p id="mapWeatherInfo">
+                    Location-specific climate information will appear here.
+                </p>
+            </div>
+
+            <section class="climate-risk-analysis map-risk-analysis" id="mapRiskPanel">
+                <h3>Selected City Risk</h3>
+                <p class="risk-empty-state">Select a city or town to request its forecast-based risk analysis.</p>
+            </section>
+
+        </div>
+
+    </div>
+
+</section>
+
+        
+
+        <section class="page module-page" id="digital-twin">
+            <h1>Digital Twin Simulation</h1>
+            <p>Explore how modified weather inputs change the existing model's weather-trigger scores for a selected city.</p>
+            <section class="panel twin-location-panel">
+                <div>
+                    <h3>Selected location</h3>
+                    <p id="twinLocation">Select a city from Climate Risk Map to begin.</p>
+                </div>
+                <p id="twinBaselineStatus" class="twin-status">
+                    Baseline is populated from the selected city's seven-day forecast.
+                </p>
+            </section>
+
+            <section class="panel twin-scenario-panel">
+                <div class="twin-section-heading">
+                    <div>
+                        <h3>Scenario controls</h3>
+                        <p>Adjust one or more weather inputs, then run the saved Random Forest models.</p>
+                    </div>
+                    <span id="twinBaselineDate" class="twin-baseline-date">No forecast baseline</span>
+                </div>
+
+                <div id="twinWeatherReadout" class="twin-weather-readout">
+                    <p>Baseline weather is unavailable until a selected city forecast succeeds.</p>
+                </div>
+
+                <div class="twin-controls-grid">
+                    <div class="twin-control">
+                        <label for="twinRainfall">Rainfall</label>
+                        <output id="twinRainfallValue" for="twinRainfall">— mm</output>
+                        <input id="twinRainfall" type="number" min="0" max="300" step="0.1" value="0" disabled>
+                        <small>0–300 mm</small>
+                    </div>
+                    <div class="twin-control">
+                        <label for="twinTemperature">Temperature</label>
+                        <output id="twinTemperatureValue" for="twinTemperature">— °C</output>
+                        <input id="twinTemperature" type="number" min="0" max="50" step="0.1" value="0" disabled>
+                        <small>0–50 °C</small>
+                    </div>
+                    <div class="twin-control">
+                        <label for="twinWind">Wind speed</label>
+                        <output id="twinWindValue" for="twinWind">— km/h</output>
+                        <input id="twinWind" type="number" min="0" max="150" step="0.1" value="0" disabled>
+                        <small>0–150 km/h</small>
+                    </div>
+                    <div class="twin-control">
+                        <label for="twinHumidity">Relative humidity</label>
+                        <output id="twinHumidityValue" for="twinHumidity">— %</output>
+                        <input id="twinHumidity" type="number" min="0" max="100" step="0.1" value="0" disabled>
+                        <small>0–100%</small>
+                    </div>
+                </div>
+
+                <div class="twin-actions">
+                    <button id="runTwinSimulation" type="button" class="twin-primary-button" disabled>Run Simulation</button>
+                    <button id="resetTwinScenario" type="button" class="twin-secondary-button" disabled>Reset Scenario</button>
+                    <span id="twinSimulationStatus" role="status" aria-live="polite">
+                        Select a city and load its baseline forecast first.
+                    </span>
+                </div>
+                <div id="twinTrainingWarnings" class="twin-training-warning" role="status" aria-live="polite" hidden></div>
+            </section>
+
+            <section id="twinResults" class="twin-results" hidden>
+                <div class="twin-section-heading">
+                    <div>
+                        <h3>Baseline vs scenario</h3>
+                        <p id="twinResultLocation"></p>
+                    </div>
+                    <span class="twin-model-label">Existing model scores · not disaster probabilities</span>
+                </div>
+                <div id="twinRiskComparisons" class="twin-risk-grid"></div>
+                <div class="panel twin-weather-panel">
+                    <h3>Weather input comparison</h3>
+                    <div id="twinWeatherComparison" class="twin-weather-comparison"></div>
+                </div>
+                <p id="twinInterpretation" class="twin-disclaimer"></p>
+                <p class="twin-map-legend">
+                    <span><i class="twin-legend-baseline"></i> Baseline weather</span>
+                    <span><i class="twin-legend-scenario"></i> Simulated scenario</span>
+                    Visual rings on the existing Climate Risk Map distinguish these two score sets only; they are not hazard boundaries.
+                </p>
+            </section>
+        </section>
+
+        <section class="page module-page" id="vulnerability">
+            <h1>Vulnerability Analysis</h1>
+            <p>Identify geographically and socially vulnerable communities.</p>
+            <div class="panel">
+                <h3>Community Risk Analysis</h3>
+                <p>Vulnerability analysis will be integrated here.</p>
+            </div>
+        </section>
+
+        <section class="page module-page" id="alerts">
+            <h1>Alerts & Warnings</h1>
+            <p>Climate risk alerts and early warning information.</p>
+            <div class="panel">
+                <h3>Climate Alerts</h3>
+                <p>Live alert integration will be developed here.</p>
+            </div>
+        </section>
+
+        <section class="page module-page" id="preparedness">
+            <h1>Community Preparedness</h1>
+            <p>Disaster preparedness and safety recommendations.</p>
+            <div class="panel">
+                <h3>Safety & Preparedness</h3>
+                <p>Community safety resources will be added here.</p>
+            </div>
+        </section>
+
+
+        <footer>
+            ClimateRisk AI © 2026 | Community Climate Intelligence Platform
+        </footer>
+
+    </main>
+
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
